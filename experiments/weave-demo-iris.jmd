@@ -1,6 +1,6 @@
 ## Package initialization
 
-```julia
+```julia, results = "hidden"
 using CSV
 using JSON3
 using DataFrames
@@ -15,12 +15,12 @@ using AWS: @service
 
 ## Credentials
 
-```julia; echo=false; results = "hidden"
+```julia, echo=false, results = "hidden"
 println(pwd())
 println(@__DIR__)
 ```
 
-```julia; result="hidden"
+```julia, results = "hidden"
 root = dirname(@__DIR__)
 aws_creds_dict = TOML.parsefile("$root/.aws/credentials")["default"]
 aws_creds = AWS.AWSCredentials(
@@ -37,6 +37,13 @@ iris_df = DataFrame(CSV.File(iris))
 iris_gdf = groupby(iris_df, :variety)
 ```
 
+## Formulas
+
+Equation is:
+
+$w(n) = \alpha - \beta\cos\frac{2\pi n}{N-1}$
+Where $\alpha=0.54$ and $\beta=0.46$
+
 ## Plots
 
 ```julia
@@ -45,7 +52,6 @@ f1 = fig[1,1]
 f2 = fig[2,1]
 ax1 = Axis(f1)
 for (key, val) in iris_gdf.keymap
-    println(key)
     scatter!(f1, iris_gdf[val][!, "sepal.length"], iris_gdf[val][!, "petal.length"], label = key[1])
 end
 # axislegend(ax1, position=(1.0, 0.0))
