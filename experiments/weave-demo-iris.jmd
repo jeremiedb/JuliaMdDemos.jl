@@ -15,11 +15,6 @@ using AWS: @service
 
 ## Credentials
 
-```julia, echo=false, results = "hidden"
-println(pwd())
-println(@__DIR__)
-```
-
 ```julia, results = "hidden"
 root = dirname(@__DIR__)
 aws_creds_dict = TOML.parsefile("$root/.aws/credentials")["default"]
@@ -31,9 +26,14 @@ aws_config = AWS.AWSConfig(creds = aws_creds, region="ca-central-1")
 
 ## Load data
 
-```julia; results="hidden"
-iris = S3.get_object("jeremiedb", "share/datasets.jl/iris.csv", Dict("response-content-type" => "raw"), aws_config = aws_config)
-iris_df = DataFrame(CSV.File(iris))
+```julia, results = "hidden"
+# iris = S3.get_object("jeremiedb", "share/datasets.jl/iris.csv", Dict("response-content-type" => "raw"), aws_config = aws_config)
+# iris_df = DataFrame(CSV.File(iris))
+
+tmp = tempname()
+download("https://jeremiedb.s3.ca-central-1.amazonaws.com/share/datasets.jl/iris.csv", tmp)
+CSV.read(tmp, DataFrame)
+
 iris_gdf = groupby(iris_df, :variety)
 ```
 
