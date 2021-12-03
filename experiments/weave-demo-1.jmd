@@ -39,8 +39,7 @@ DSP.jl package doesn't (yet) have a method to calculate the
 the frequency response of a FIR filter so we define it:
 
 ```julia
-using Plots, DSP
-gr()
+using CairoMakie, DSP
 
 function FIRfreqz(b::Array, w = range(0, stop=π, length=1024))
     n = length(w)
@@ -86,18 +85,14 @@ ws = w/pi*(fs/2)
 ```
 
 ```julia
-plot(ws, h_db,
-      xlabel = "Frequency (Hz)", ylabel = "Magnitude (db)")
+lines(ws, h_db,
+  xlabel = "Frequency (Hz)", ylabel = "Magnitude (db)")
 ```
 
 And again with default options
 
 ```julia
 h_phase = unwrap(-atan.(imag.(h),real.(h)))
-plot(ws, h_phase,
-    xlabel = "Frequency (Hz)", ylabel = "Phase (radians)")
-```
-
-```julia
-x1 = 33
+lines(ws, h_phase,
+  xlabel = "Frequency (Hz)", ylabel = "Phase (radians)")
 ```
