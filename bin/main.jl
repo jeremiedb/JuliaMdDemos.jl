@@ -1,6 +1,7 @@
 using Weave
 
 println("pwd():", pwd())
+println("@__DIR__:", @__DIR__)
 
 path = tempdir()
 weave("../experiments/weave-demo-iris.jmd", 
