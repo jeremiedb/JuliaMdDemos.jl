@@ -1,0 +1,49 @@
+## Package initialization
+
+```julia
+using CSV
+using JSON3
+using DataFrames
+using TOML
+
+using CairoMakie
+
+using AWS
+using AWS: @service
+@service S3
+```
+
+## Credentials
+
+```julia
+aws_creds_dict = TOML.parsefile("/mnt/data/code/.aws/credentials")["default"]
+aws_creds = AWS.AWSCredentials(
+    aws_creds_dict["aws_access_key_id"], 
+    aws_creds_dict["aws_secret_access_key"])
+aws_config = AWS.AWSConfig(creds = aws_creds, region="ca-central-1")
+```
+
+## Load data
+
+```julia
+iris = S3.get_object("jeremiedb", "share/datasets.jl/iris.csv", Dict("response-content-type" => "raw"), aws_config = aws_config)
+iris_df = DataFrame(CSV.File(iris))
+iris_gdf = groupby(iris_df, :variety)
+```
+
+## Plots
+
+```julia
+fig = Figure()
+f1 = fig[1,1]
+f2 = fig[2,1]
+ax1 = Axis(f1)
+for (key, val) in iris_gdf.keymap
+    println(key)
+    scatter!(f1, iris_gdf[val][!, "sepal.length"], iris_gdf[val][!, "petal.length"], label = key[1])
+end
+# axislegend(ax1, position=(1.0, 0.0))
+# Legend(f2, ax1)
+Legend(f2, ax1, orientation = :horizontal)
+current_figure()
+```
