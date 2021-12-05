@@ -10,12 +10,12 @@ cd(@__DIR__)
 println("pwd() 2: ", pwd())
 println("@__DIR__ 2: ", @__DIR__)
 
-path = "home/jrun/results"
-# mkdir(path)
+path_results = "/home/jrun/results"
+# path_figs = "/home/jrun/figs"
 
 weave("weave-demo-iris.jmd", 
-    out_path = path, 
-    fig_path = "$(path)/figs", 
+    out_path = path_results, 
+    fig_path = path_results, 
     doctype = "md2html")
 
 open("/home/jrun/results.json", "w") do io
@@ -31,5 +31,5 @@ end
 # ENV["RESULTS_FILE"] = "results.json"
 # ENV["RESULTS_FILE"] = "weave-demo-iris.jmd"
 
-tarball = Tar.create(path)
+tarball = Tar.create(path_results)
 ENV["RESULTS_FILE"] = tarball
