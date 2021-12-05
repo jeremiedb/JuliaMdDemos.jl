@@ -11,7 +11,7 @@ println("pwd() 2: ", pwd())
 println("@__DIR__ 2: ", @__DIR__)
 
 path = "home/jrun/results"
-mkdir(path)
+# mkdir(path)
 
 weave("weave-demo-iris.jmd", 
     out_path = path, 
