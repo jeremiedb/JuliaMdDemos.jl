@@ -24,5 +24,6 @@ end
 @info readdir("home/jrun")
 
 ENV["RESULTS"] = JSON3.write(Dict("tag" => "iris report"))
-ENV["RESULTS_FILE"] = "/home/jrun/weave-demos-iris.html"
+# ENV["RESULTS_FILE"] = "/home/jrun/weave-demos-iris.html"
+ENV["RESULTS_FILE"] = "/home/jrun/results.json"
 # ENV["RESULTS_FILE"] = "weave-demo-iris.jmd"
