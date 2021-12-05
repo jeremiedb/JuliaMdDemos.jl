@@ -15,6 +15,10 @@ weave("weave-demo-iris.jmd",
     fig_path = "/home/jrun/figs", 
     doctype = "md2html")
 
+open("/home/jrun/results.json", "w") do io
+    JSON3.pretty(io, JSON3.write(Dict("tag" => "iris report json")))
+end
+
 @info readdir()
 @info readdir(path)
 @info readdir("home/jrun")
