@@ -6,6 +6,9 @@ println("@__DIR__:", @__DIR__)
 
 cd(@__DIR__)
 
+println("pwd() 2:", pwd())
+println("@__DIR__ 2:", @__DIR__)
+
 path = tempdir()
 weave("weave-demo-iris.jmd", 
     out_path = "$path", 
