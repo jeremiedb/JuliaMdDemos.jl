@@ -11,8 +11,8 @@ println("@__DIR__ 2:", @__DIR__)
 
 path = tempdir()
 weave("weave-demo-iris.jmd", 
-    out_path = "/home/jrun", 
-    fig_path = "/home/jrun/figs", 
+    out_path = "/mnt/data", 
+    fig_path = "/mnt/data/figs", 
     doctype = "md2html")
 
 open("/home/jrun/results.json", "w") do io
@@ -21,7 +21,7 @@ end
 
 @info readdir()
 @info readdir(path)
-@info readdir("home/jrun")
+@info readdir("mnt/data")
 
 ENV["RESULTS"] = JSON3.write(Dict("tag" => "iris report"))
 # ENV["RESULTS_FILE"] = "/home/jrun/weave-demos-iris.html"
