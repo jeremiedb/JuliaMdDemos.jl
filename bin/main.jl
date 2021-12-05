@@ -20,4 +20,4 @@ open("/home/jrun/results.json", "w") do io
 end
 
 @info readdir(path_results)
-ENV["RESULTS_FILE"] = "results.json"
+ENV["RESULTS_FILE"] = "$(path_results)/weave-demos-iris.html"
