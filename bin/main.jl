@@ -11,8 +11,8 @@ println("@__DIR__ 2:", @__DIR__)
 
 path = tempdir()
 weave("weave-demo-iris.jmd", 
-    out_path = "$path", 
-    fig_path = "$(path)/figs", 
+    out_path = "", 
+    fig_path = "/figs", 
     doctype = "md2html")
 
 @info readdir()
