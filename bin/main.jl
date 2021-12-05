@@ -20,6 +20,4 @@ open("/home/jrun/results.json", "w") do io
 end
 
 @info readdir(path_results)
-
-tarball = Tar.create(path_results)
-ENV["RESULTS_FILE"] = tarball
+ENV["RESULTS_FILE"] = "results.json"
