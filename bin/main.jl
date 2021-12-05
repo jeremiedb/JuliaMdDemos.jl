@@ -17,6 +17,7 @@ weave("weave-demo-iris.jmd",
 
 @info readdir()
 @info readdir(path)
+@info readdir("home/jrun")
 
 ENV["RESULTS"] = JSON3.write(Dict("tag" => "iris report"))
 ENV["RESULTS_FILE"] = "/home/jrun/weave-demos-iris.html"
