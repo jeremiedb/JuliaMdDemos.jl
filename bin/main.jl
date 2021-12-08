@@ -2,8 +2,8 @@ using Weave
 using JSON3
 using Tar
 
-report = parse(String, get(ENV, "type", "iris"))
-output = parse(String, get(ENV, "output", "html"))
+report = get(ENV, "type", "iris")
+output = get(ENV, "output", "html")
 
 @assert report ∈ ["iris", "zoo"]
 
