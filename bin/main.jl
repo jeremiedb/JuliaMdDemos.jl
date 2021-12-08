@@ -2,22 +2,24 @@ using Weave
 using JSON3
 using Tar
 
-println("pwd(): ", pwd())
-println("@__DIR__: ", @__DIR__)
+report = parse(String, get(ENV, "type", "iris"))
+output = parse(String, get(ENV, "output", "html"))
 
-# cd(@__DIR__)
+@assert report ∈ ["iris", "zoo"]
 
 path_results = "/home/jrun/results"
 path_fig = "/home/jrun/results/fig"
 
-weave("$(@__DIR__)/weave-demo-iris.jmd", 
-    out_path = path_results, 
-    fig_path = path_fig, 
+weave("$(@__DIR__)/weave-demo-$report).jmd", 
+    out_path = path_results,
+    fig_path = path_fig,
     doctype = "md2html")
 
-open("/home/jrun/results.json", "w") do io
-    JSON3.pretty(io, JSON3.write(Dict("tag" => "iris report json")))
-end
+ENV["RESULTS"] = JSON3.write(Dict("results directory" => readdir()))
 
-@info readdir(path_results)
-ENV["RESULTS_FILE"] = "$(path_results)/weave-demo-iris.html"
+if output == "html"
+    ENV["RESULTS_FILE"] = "$(path_results)/weave-demo-$(report).html"
+else
+    tarball = Tar.create(path_results)
+    ENV["RESULTS_FILE"] = tarball
+end
