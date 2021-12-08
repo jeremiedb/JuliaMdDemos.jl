@@ -10,7 +10,7 @@ output = get(ENV, "output", "html")
 path_results = "/home/jrun/results"
 path_fig = "/home/jrun/results/fig"
 
-weave("$(@__DIR__)/weave-demo-$report).jmd", 
+weave("$(@__DIR__)/weave-demo-$(report).jmd", 
     out_path = path_results,
     fig_path = path_fig,
     doctype = "md2html")
