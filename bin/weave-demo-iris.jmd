@@ -32,8 +32,6 @@ aws_config = AWS.AWSConfig(creds = aws_creds, region="ca-central-1")
 tmp = tempname()
 download("https://jeremiedb.s3.ca-central-1.amazonaws.com/share/datasets.jl/iris.csv", tmp)
 iris_df = CSV.read(tmp, DataFrame)
-
-iris_gdf = groupby(iris_df, :variety)
 ```
 
 ## Formulas
@@ -50,11 +48,13 @@ fig = Figure()
 f1 = fig[1,1]
 f2 = fig[2,1]
 ax1 = Axis(f1)
+
+iris_gdf = groupby(iris_df, :variety)
+
 for (key, val) in iris_gdf.keymap
     scatter!(f1, iris_gdf[val][!, "sepal.length"], iris_gdf[val][!, "petal.length"], label = key[1])
 end
-# axislegend(ax1, position=(1.0, 0.0))
-# Legend(f2, ax1)
+
 Legend(f2, ax1, orientation = :horizontal)
 current_figure()
 ```

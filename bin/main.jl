@@ -15,7 +15,7 @@ weave("$(@__DIR__)/weave-demo-$report).jmd",
     fig_path = path_fig,
     doctype = "md2html")
 
-ENV["RESULTS"] = JSON3.write(Dict("results directory" => readdir()))
+ENV["RESULTS"] = JSON3.write(Dict("results directory" => readdir(path_results)))
 
 if output == "html"
     ENV["RESULTS_FILE"] = "$(path_results)/weave-demo-$(report).html"
