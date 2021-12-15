@@ -10,8 +10,8 @@ output = get(ENV, "output", "html")
 
 @assert report ∈ ["iris", "zoo"]
 
-path_results = "$(@__DIR__)/../results"
-path_fig = "$(path_results)/fig"
+path_results = "/home/jrun/results"
+path_fig = "/home/jrun/results/fig"
 
 weave("$(@__DIR__)/weave-demo-$(report).jmd", 
     out_path = path_results,
