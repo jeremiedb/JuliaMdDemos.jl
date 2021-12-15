@@ -2,6 +2,9 @@ using Weave
 using JSON3
 using Tar
 
+println("pwd(): ", pwd())
+println("@__DIR__: ", @__DIR__)
+
 report = get(ENV, "type", "iris")
 output = get(ENV, "output", "html")
 
